@@ -4,7 +4,7 @@ class Header extends Component {
     render() {
         return (
             <div>
-                <header>
+  <header>
   <div className="header-area header-transparent">
     <div className="main-header header-sticky">
       <div className="container-fluid">
@@ -18,19 +18,31 @@ class Header extends Component {
                 <ul id="navigation">
                   <li><a href="index-2.html">Home</a></li>
                   <li><a href="menu.html">Menu</a></li>
-                  <li><a href="about.html">About</a></li>
-                  <li><a href="#">Blog</a>
+                  {/* <li><a href="about.html">About</a></li> */}
+                  {/* <li><a href="#">Blog</a>
                     <ul className="submenu">
                       <li><a href="blog.html">Blog</a></li>
                       <li><a href="blog_details.html">Blog Details</a></li>
                       <li><a href="elements.html">Element</a></li>
                     </ul>
+                  </li> */}
+                  {/* Menu chuc nang tao hoa don, tao thanh toan, tim kiem */}
+                  <li><a href="contact.html">Search</a></li>
+                  <li><a href="contact.html">Payment</a>
+                    <ul className="submenu">  
+                      <li><a href="blog.html">Payment</a></li>
+                      <li><a href="blog_details.html">Invoice</a></li>
+                      </ul>
                   </li>
+                   {/* ----------------------------------------------------- */}
                   <li><a href="contact.html">Contact</a></li>
                 </ul>
               </nav>
             </div>
           </div>
+         
+          
+     
           <div className="buttons">
             <ul>
               <li className="button-header">
@@ -47,6 +59,7 @@ class Header extends Component {
     </div>
   </div>
 </header>
+
 
             </div>
         );

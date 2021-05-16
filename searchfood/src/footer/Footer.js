@@ -87,7 +87,10 @@ class Footer extends Component {
                     </div>
                 </div>
                 </footer>
-
+                    <div id="back-top">
+                    <a title="Go to Top" href="#"> <i className="fas fa-level-up-alt" /></a>
+                    </div>
+   
             </div>
         );
     }

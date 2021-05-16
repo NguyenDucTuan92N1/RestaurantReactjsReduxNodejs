@@ -3,11 +3,9 @@ import React, { Component } from 'react';
 
 class Body extends Component {
     render() {
-        
         return (
             <div>
          <main>
-
         <div className="slider-area slider-height">
           <div className="slider-active">
             <div className="single-slider">

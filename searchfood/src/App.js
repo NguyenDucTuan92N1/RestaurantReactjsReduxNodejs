@@ -8,9 +8,8 @@ import Body from './body/Body';
 function App() {
   return (
     <div className="App">
-      <h1>Bat dau</h1>
       <Header/>
-      <Searchfood/>
+      {/* <Searchfood/> */}
       <Body/>
       <Footer/>
     </div>
