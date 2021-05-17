@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import SearchBox from '../body/SearchBox';
 
 class Header extends Component {
     render() {
@@ -46,8 +47,9 @@ class Header extends Component {
           <div className="buttons">
             <ul>
               <li className="button-header">
-                <a href="#" className="header-btn mr-30">Book a Table</a>
-                <a href="#" className="btn header-btn2"> <i className="fas fa-phone-alt" />+10 (78) 783 3674</a>
+                  <SearchBox/>
+                {/* <a href="#" className="header-btn mr-30">Book a Table</a>
+                <a href="#" className="btn header-btn2"> <i className="fas fa-phone-alt" />+10 (78) 783 3674</a> */}
               </li>
             </ul>
           </div>
