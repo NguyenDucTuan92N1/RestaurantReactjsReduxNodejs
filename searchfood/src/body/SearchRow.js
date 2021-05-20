@@ -3,17 +3,18 @@ import React, { Component } from 'react';
 class SearchRow extends Component {
     render() {
         return (
-            <div>
-            <div className="wrap">
-              <div className="searchbar">
-                <input type="text" className="searchTerm" placeholder="What are you looking for?" />
-                <button type="submit" className="searchButton">
-                  <i className="fa fa-search" />
-                </button>
-              </div>
-            </div>
-          </div>
-          
+          <div>
+            <center>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+          {/* The form */}
+          <form className="example" action="action_page.php">
+            <input type="text" placeholder="Search.." name="search" />
+            <button type="submit"><i className="fa fa-search" /></button>
+          </form>
+          </center>
+        </div>
+        
+        
           
         );
     }
