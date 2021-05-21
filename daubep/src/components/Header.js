@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Header extends Component {
     render() {
         return (
-            <div>
+        
                 <header>
                 <div className="header-area header-transparent">
                     <div className="main-header header-sticky">
@@ -18,15 +18,8 @@ class Header extends Component {
                                             <ul id="navigation">
                                                 <li><a href="index-2.html">Home</a></li>
                                                 <li><a href="menu.html">Menu</a></li>
-                                                <li><a href="about.html">About</a></li>
-                                                <li><a href="#">Blog</a>
-                                                    <ul className="submenu">
-                                                        <li><a href="blog.html">Blog</a></li>
-                                                        <li><a href="blog_details.html">Blog Details</a></li>
-                                                        <li><a href="elements.html">Element</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="contact.html">Contact</a></li>
+                                                <li><a href="menu.html">Order</a></li>
+                                                
                                             </ul>
                                         </nav>
                                     </div>
@@ -34,7 +27,6 @@ class Header extends Component {
                                 <div className="buttons">
                                     <ul>
                                         <li className="button-header">
-                                            <a href="#" className="header-btn mr-30">Book a Table</a>
                                             <a href="#" className="btn header-btn2"> <i className="fas fa-phone-alt" />+10 (78) 783 3674</a>
                                         </li>
                                     </ul>
@@ -47,7 +39,7 @@ class Header extends Component {
                     </div>
                 </div>
             </header>
-            </div>
+           
         );
     }
 }

@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class Footer extends Component {
     render() {
         return (
-            <div>
+       
                 <footer>
                     <div className="footer-wrapper">
                         <div className="footer-area footer-padding">
@@ -91,7 +91,7 @@ export default class Footer extends Component {
                     </div>
                 </footer>
 
-            </div>
+    
         )
     }
 }
