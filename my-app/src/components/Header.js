@@ -1,10 +1,14 @@
-import React, { Component } from 'react';
-
-class Header extends Component {
-    render() {
-        return (
+import React, { Component, useState } from 'react';
+import ShoppingCart from '../components/shoppingCart/ShoppingCart';
+import Popup from './popup/Popup';
+const Header = () => {
+    let [isPopup, setIsPopup] = useState(false)
+        return ( 
             <div>
                 <header>
+                {
+                    isPopup && <Popup setIsPopup={setIsPopup}/>
+                }
                 <div className="header-area header-transparent">
                     <div className="main-header header-sticky">
                         <div className="container-fluid">
@@ -28,6 +32,9 @@ class Header extends Component {
                                                 </li>
                                                 <li><a href="contact.html">Contact</a></li>
                                             </ul>
+                                            <div className="shoppingcart">
+                                                <ShoppingCart onClick={() => setIsPopup(true)}/>
+                                            </div>
                                         </nav>
                                     </div>
                                 </div>
@@ -49,7 +56,6 @@ class Header extends Component {
             </header>
             </div>
         );
-    }
 }
 
 export default Header;
