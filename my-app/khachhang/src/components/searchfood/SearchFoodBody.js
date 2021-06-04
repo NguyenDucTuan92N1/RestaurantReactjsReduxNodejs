@@ -6,6 +6,7 @@ import Dropdownbutton from "./Dropdownbutton.js";
 
 class SearchFoodBody extends Component {
   render() {
+    console.log(this.props)
     return (
       <div>
         <div className="footer-wrapper">
@@ -19,7 +20,7 @@ class SearchFoodBody extends Component {
         
           <div style={{ height: "100px" }} />
 
-          <Cardbox />
+          <Cardbox price="10,000" description="Mon an dan gian"/>
 
           <div></div>
         </div>

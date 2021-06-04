@@ -1,119 +1,25 @@
 import React, { Component } from "react";
-
+import CardItem from "./CardItem";
+import dl from  '../data.json'
 class Cardbox extends Component {
+
+  
   render() {
+    console.log(this.props)
     return (
       <div class="row">
-        <div class="column">
-          <div class="card">
-            <img
-              src="https://via.placeholder.com/150"
-              className="rounded "
-              alt="hinh"
+        {
+          dl.map((value,key)=> (
+            <CardItem key={key}
+                      id={value.id}
+                      picture={value.picture}
+                      price = {value.price}
+                      description = {value.description}
+                      name = {value.name}
+
             />
-            <button class="buttonSelect">Button</button>
-
-            <p>Some text</p>
-            <p>Some text</p>
-          </div>
-        </div>
-
-        <div class="column">
-          <div class="card">
-            <img
-              src="https://via.placeholder.com/150"
-              className="rounded "
-              alt="hinh"
-            />
-            <button class="buttonSelect">Button</button>
-            <p>Some text</p>
-            <p>Some text</p>
-          </div>
-        </div>
-
-        <div class="column">
-          <div class="card">
-            <img
-              src="https://via.placeholder.com/150"
-              className="rounded "
-              alt="hinh"
-            />
-            <button class="buttonSelect">Button</button>
-            <p>Some text</p>
-            <p>Some text</p>
-          </div>
-        </div>
-
-        <div class="column">
-          <div class="card">
-            <img
-              src="https://via.placeholder.com/150"
-              className="rounded "
-              alt="hinh"
-            />
-            <button class="buttonSelect">Button</button>
-            <p>Some text</p>
-            <p>Some text</p>
-          </div>
-
-        </div>
-        
-        <div class="column">
-          <div class="card">
-            <img
-              src="https://via.placeholder.com/150"
-              className="rounded "
-              alt="hinh"
-            />
-            <button class="buttonSelect">Button</button>
-            <p>Some text</p>
-            <p>Some text</p>
-          </div>
-
-        </div>
-
-        <div class="column">
-          <div class="card">
-            <img
-              src="https://via.placeholder.com/150"
-              className="rounded "
-              alt="hinh"
-            />
-            <button class="buttonSelect">Button</button>
-            <p>Some text</p>
-            <p>Some text</p>
-          </div>
-
-        </div>
-
-        <div class="column">
-          <div class="card">
-            <img
-              src="https://via.placeholder.com/150"
-              className="rounded "
-              alt="hinh"
-            />
-            <button class="buttonSelect">Button</button>
-            <p>Some text</p>
-            <p>Some text</p>
-          </div>
-
-        </div>
-
-        <div class="column">
-          <div class="card">
-            <img
-              src="https://via.placeholder.com/150"
-              className="rounded "
-              alt="hinh"
-            />
-            <button class="buttonSelect">Button</button>
-            <p>Some text</p>
-            <p>Some text</p>
-          </div>
-
-        </div>
-
+          ))
+        }
       </div>
     );
   }

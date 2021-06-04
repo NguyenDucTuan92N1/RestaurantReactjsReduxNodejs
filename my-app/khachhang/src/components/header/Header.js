@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import SearchBox from "../searchfood/SearchBox.js";
 import {
-  BrowserRouter as Router,
-  Route,
-  Link
+  NavLink
 } from "react-router-dom";
 
 class Header extends Component {
@@ -40,16 +38,16 @@ class Header extends Component {
                   </li> */}
                           {/* Menu chuc nang tao hoa don, tao thanh toan, tim kiem */}
                           <li>
-                           <Link to="/searchfood">Search</Link>
+                           <NavLink to="/searchfood">Search</NavLink>
                           </li>
                           <li>
                             <a href="contact.html">Payment</a>
                             <ul className="submenu">
                               <li>
-                                <Link to="/payment">Payment</Link>
+                                <NavLink to="/payment">Payment</NavLink>
                               </li>
                               <li>
-                                <Link to="/invoicegen">Invoice</Link>
+                                <NavLink to="/invoicegen">Invoice</NavLink>
                             
                               </li>
                             </ul>

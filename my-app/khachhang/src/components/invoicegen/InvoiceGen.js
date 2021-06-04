@@ -14,11 +14,11 @@ class InvoiceGen extends Component {
     <textarea id="address" defaultValue={"Chris Coyier\n123 Appleseed Street\nAppleville, WI 53719\n\nPhone: (555) 555-5555"} />
     <div id="logo">
       <div id="logoctr">
-        <a href="javascript:;" id="change-logo" title="Change logo">Change Logo</a>
-        <a href="javascript:;" id="save-logo" title="Save changes">Save</a>
+        <a href="1javascript:;" id="change-logo" title="Change logo">Change Logo</a>
+        <a href="1javascript:;" id="save-logo" title="Save changes">Save</a>
         |
-        <a href="javascript:;" id="delete-logo" title="Delete logo">Delete Logo</a>
-        <a href="javascript:;" id="cancel-logo" title="Cancel changes">Cancel</a>
+        <a href="1javascript:;" id="delete-logo" title="Delete logo">Delete Logo</a>
+        <a href="1javascript:;" id="cancel-logo" title="Cancel changes">Cancel</a>
       </div>
       <div id="logohelp">
         <input id="imageloc" type="text" size={50} defaultValue /><br />
@@ -54,21 +54,21 @@ class InvoiceGen extends Component {
         <th>Price</th>
       </tr>
       <tr className="item-row">
-        <td className="item-name"><div className="delete-wpr"><textarea defaultValue={"Web Updates"} /><a className="delete" href="javascript:;" title="Remove row">X</a></div></td>
+        <td className="item-name"><div className="delete-wpr"><textarea defaultValue={"Web Updates"} /><a className="delete" href="1javascript:;" title="Remove row">X</a></div></td>
         <td className="description"><textarea defaultValue={"Monthly web updates for http://widgetcorp.com (Nov. 1 - Nov. 30, 2009)"} /></td>
         <td><textarea className="cost" defaultValue={"$650.00"} /></td>
         <td><textarea className="qty" defaultValue={"1"} /></td>
         <td><span className="price">$650.00</span></td>
       </tr>
       <tr className="item-row">
-        <td className="item-name"><div className="delete-wpr"><textarea defaultValue={"SSL Renewals"} /><a className="delete" href="javascript:;" title="Remove row">X</a></div></td>
+        <td className="item-name"><div className="delete-wpr"><textarea defaultValue={"SSL Renewals"} /><a className="delete" href="1javascript:;" title="Remove row">X</a></div></td>
         <td className="description"><textarea defaultValue={"Yearly renewals of SSL certificates on main domain and several subdomains"} /></td>
         <td><textarea className="cost" defaultValue={"$75.00"} /></td>
         <td><textarea className="qty" defaultValue={"3"} /></td>
         <td><span className="price">$225.00</span></td>
       </tr>
       <tr id="hiderow">
-        <td colSpan={5}><a id="addrow" href="javascript:;" title="Add a row">Add a row</a></td>
+        <td colSpan={5}><a id="addrow" href="1javascript:;" title="Add a row">Add a row</a></td>
       </tr>
       <tr>
         <td colSpan={2} className="blank"> </td>

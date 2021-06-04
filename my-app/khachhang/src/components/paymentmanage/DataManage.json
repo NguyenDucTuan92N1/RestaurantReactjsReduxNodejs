@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "invoiceCode": "0001",
+        "name": "anh",
+        "date": "01/01/2021",
+        "totalAmount":16000
+    },
+    {
+        "id": 2,
+        "invoiceCode": "0001",
+        "name": "anh",
+        "date": "01/01/2021",
+        "totalAmount":16002
+    },
+    {
+        "id": 3,
+        "invoiceCode": "0001",
+        "name": "anh",
+        "date": "01/01/2021",
+        "totalAmount":16003
+    },
+    {
+        "id": 4,
+        "invoiceCode": "0001",
+        "name": "anh",
+        "date": "01/01/2021",
+        "totalAmount":16004
+    }
+]
