@@ -16,7 +16,9 @@ router.get('/editProduct/:productId', isAuth, cookerController.getEditProduct);
 
 router.post('/editProduct', isAuth, cookerController.postEditProduct);
 
-// router.get('/orders', isAuth, cookerController.getOrders);
+router.get('/orders', isAuth, cookerController.getOrders);
+
+router.get('/editOrder', isAuth, cookerController.getEditOrder);
 
 router.get('/', isAuth, cookerController.getProducts);
 

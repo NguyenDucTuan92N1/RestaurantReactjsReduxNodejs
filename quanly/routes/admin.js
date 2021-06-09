@@ -40,6 +40,7 @@ router.post('/editProduct', isAuth, adminController.postEditProduct);
 router.post('/delete-product', isAuth, adminController.postDeleteProduct);
 
 router.get('/orders',  adminController.getOrders);
+router.post('/search_date',  adminController.search_date);
 
 router.get('/',  adminController.showProducts);
 

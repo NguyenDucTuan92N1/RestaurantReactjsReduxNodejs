@@ -1,6 +1,6 @@
 const Product = require('../models/product');
 const Order = require('../models/order');
-
+var moment = require('moment');
 
 exports.postDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
@@ -84,19 +84,105 @@ exports.postEditProduct = (req, res, next) => {
 exports.getOrders = (req, res, next) => {
   Order.find()
     .then(orders => {
-      for (let o of orders){
-        // console.log(user_s);
-        // var u_name = o.user.name;
-        // var o1 = {...o, username: u_name}
-        // newOrders.push(o1);
-      } 
-      // console.log(newOrders);
-      res.render('admin/orders', {
+
+      res.render('cooker/orders', {
         path: '/orders',
         pageTitle: 'Orders',
         orders: orders,
+        moment: moment,
+        date_from: new Date(),
+        date_to: new Date(),
         username: (req.session.cooker) ? req.session.cooker.email : "null"
       });
+    })
+    .catch(err => console.log(err));
+};
+
+exports.getEditOrder = (req, res, next) => {
+  const editMethod = req.query.editMethod; // 1. Tăng 1, 2. Giảm 1, 3. Hủy, 4. Hoàn thành
+  const prodId = req.query.productId;
+  const orderId = req.query.orderId;
+  const hide = req.query.hide;
+  console.log("hide");
+  console.log(hide);
+  console.log(req.query);
+  Order.findById(orderId)
+    .then(order => {
+      if (!order) {
+        return res.redirect('/');
+      }
+      if(hide){
+        console.log("Đã ẩn.");
+        order.status = -1;
+        console.log(order.status);
+      }
+      else{
+        for (var p of order.products) {
+          console.log(p.product._id.toString());
+          console.log(prodId.toString());
+          if (p.product._id.toString() === prodId.toString()) {
+            if (editMethod === "1") {
+              // Tăng 1
+              console.log("Tăng 1");
+              p.quantity = p.quantity + 1;
+            }
+            if (editMethod === "2") {
+              // Giảm 1
+              console.log("Giảm 1");
+              p.quantity = p.quantity - 1;
+            }
+            if (editMethod.toString() === "3") {
+              // Hoàn tất
+              console.log("Hoàn tất");
+              
+              p.product = {...p.product, status: 2}
+  
+  
+            }
+            if (editMethod.toString() === "4") {
+              // Hủy món
+              console.log("Hủy món");
+              p.product = {...p.product, status: -1}
+  
+            }
+          }
+        }
+      }
+      
+      console.log(order);
+      order.save().then(order => {
+        return res.redirect('/orders#' + order._id);
+      }
+      ).catch(err => console.log(err));
+
+    })
+    .catch(err => console.log(err));
+};
+
+///
+exports.postEditProduct = (req, res, next) => {
+  const prodId = req.body.productId;
+  // const updatedTitle = req.body.title;
+  // const updatedPrice = req.body.price;
+  // const updatedImageUrl = req.body.imageUrl;
+  // const updatedDesc = req.body.description;
+  // const updatedcategory = req.body.category;
+  const updatedstatus = req.body.status;
+  const updatedquantity = req.body.quantity;
+  Product.findById(prodId)
+    .then(product => {
+      // product.title = updatedTitle;
+      // product.price = updatedPrice;
+      // product.description = updatedDesc;
+      // product.imageUrl = updatedImageUrl;
+      // product.category = updatedcategory;
+      product.status = updatedstatus;
+      product.quantity = updatedquantity;
+      return product.save();
+    })
+    .then(result => {
+      console.log('UPDATED PRODUCT!');
+      res.redirect('/products');
     })
     .catch(err => console.log(err));
 };

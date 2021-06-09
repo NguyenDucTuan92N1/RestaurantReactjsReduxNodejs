@@ -77,7 +77,7 @@ app.use(csrfProtection);
 app.use(flash());
 
 app.use((req, res, next) => {
-  if (!req.session.user) {
+  if (!req.session.cooker) {
     return next();
   }
   Cooker.findById(req.session.cooker._id)
@@ -102,7 +102,7 @@ app.use(errorController.get404);
 mongoose
   .connect(MONGODB_URI,{ useNewUrlParser: true })
   .then(result => {
-    app.listen(process.env.PORT || 3001);
+    app.listen(process.env.PORT || 3002);
   })
   .catch(err => {
     console.log(err);

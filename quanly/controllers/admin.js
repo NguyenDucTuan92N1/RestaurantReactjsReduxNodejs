@@ -1,6 +1,6 @@
 const Product = require('../models/product');
 const Order = require('../models/order');
-
+var moment = require('moment');
 // exports.getAddProduct = (req, res, next) => {
 //   res.render('admin/edit-product', {
 //     pageTitle: 'Add Product',
@@ -166,17 +166,50 @@ exports.postEditProduct = (req, res, next) => {
 exports.getOrders = (req, res, next) => {
   Order.find()
     .then(orders => {
-      for (let o of orders){
-        // console.log(user_s);
-        // var u_name = o.user.name;
-        // var o1 = {...o, username: u_name}
-        // newOrders.push(o1);
-      } 
-      // console.log(newOrders);
+      
       res.render('admin/orders', {
         path: '/orders',
         pageTitle: 'Orders',
         orders: orders,
+        moment: moment ,
+        date_from: new Date(),
+        date_to: new Date(),
+        username: (req.session.user) ? req.session.user.email : "null"
+      });
+    })
+    .catch(err => console.log(err));
+};
+exports.search_date = (req, res, next) => {
+  var date_from = req.body.date_from;
+  var date_to = req.body.date_to;
+  console.log("date_from " + date_from);
+  console.log("date_to " + date_to);
+  console.log("new Date: " + new Date().toString());
+  
+  // console.log(" moment().subtract(1, 'days'): " + typeof( moment().subtract(1, 'days')));
+// {createAt: {$gte: new Date("10/06/2014")}}
+  Order.find()
+    .then(orders => {
+      var newOrders = [];
+
+      if(orders.length > 0){
+        var date1 = new Date(date_from);
+        var date2 = new Date(date_to);
+        for (const order of orders) {
+          var date3 = new Date(orders[0].createdAt.toString());
+          if(date1.getTime() < date3.getTime() && date3.getTime() < date2.getTime() ){
+            newOrders.push(order);
+          }
+        }
+      }
+      
+      res.render('admin/orders', {
+        path: '/orders',
+        pageTitle: 'Orders',
+        orders: newOrders,
+        moment: moment ,
+        date_from: new Date(date_from),
+        date_to: new Date(date_to),
         username: (req.session.user) ? req.session.user.email : "null"
       });
     })
