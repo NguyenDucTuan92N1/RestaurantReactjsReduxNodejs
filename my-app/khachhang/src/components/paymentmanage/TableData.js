@@ -3,14 +3,23 @@ import TableDataItem from './TableDataItem';
 
 class TableData extends Component {
 
+    // xoa
+    deleteButtonClick = (idUser) => {
+        this.props.deleteInvoice(idUser)
+    }
+
     mappingData = () => 
         this.props.data.map( (value, key) =>(
-            <TableDataItem  key = {key} 
+            <TableDataItem  
+                            deleteButtonClick = { (idUser) => this.deleteButtonClick(idUser)}
+                            key = {key} 
                             id = {value.id}
                             invoiceCode = {value.invoiceCode}
                             name = {value.name}
                             date = {value.date}
                             totalAmount = {value.totalAmount}
+                            editFunClick = { (invoiceNo) => this.props.editFun(value) }
+                            changeEditInvoiceStatus = { () => this.props.changeEditInvoiceStatus()}
             />
          ) )
     
