@@ -49,3 +49,9 @@ exports.getLogin = (req, res, next) => {
     errorMessage: message
   });
 };
+exports.postLogout = (req, res, next) => {
+  req.session.destroy(err => {
+    console.log(err);
+    res.redirect('/');
+  });
+};

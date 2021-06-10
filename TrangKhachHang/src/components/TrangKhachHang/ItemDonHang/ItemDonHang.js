@@ -57,8 +57,17 @@ export default class ItemDonHang extends Component {
         if(this.props.data.status === 2){
             return <p class="text-success">Đã hoàn tất</p>
         }
-        if(this.props.data.status === 3){
+        if(this.props.data.status ===  -1){
             return <p class="text-danger">Đã hủy</p>
+        }
+    }
+    showTotal = () =>{
+        if(this.props.data.index === 1){
+            console.log(this.props.data);
+            
+            return (
+                    <b>{this.props.data.total}</b>
+            )
         }
     }
     render() {
@@ -66,11 +75,13 @@ export default class ItemDonHang extends Component {
             <div className="table-row">
                 <div className="country ">{this.props.data._id}</div>
                 <div className="visit"> <img src={URLserver + this.props.data.img} alt={this.props.data.img} width= "30px" />{this.props.data.title}</div>
-                <div className="visit">{this.props.data.price}</div>
+                <div className="serial">{this.props.data.price}</div>
                 <div className="serial">{this.props.data.quantity}</div>
                 <div className="visit"> 
                     {this.showStatus()}
-                    
+                </div>
+                <div className="serial"> 
+                {this.showTotal()}
                 </div>
                 
             </div>

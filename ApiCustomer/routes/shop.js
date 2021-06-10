@@ -25,6 +25,6 @@ router.post('/create-order', isAuth, shopController.postOrder);
 router.get('/orders/:orderId', isAuth, shopController.getOneOrder);
 
 // Get tất cả orders của người dùng đang đăng nhập
-router.get('/orders', isAuth, shopController.getOrders);
+router.get('/getOrders', isAuth, shopController.getOrders);
 
 module.exports = router;

@@ -94,15 +94,15 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/admin', adminRoutes);
 app.use(authRoutes);
+app.use('/admin', adminRoutes);
 
 app.use(errorController.get404);
 
 mongoose
   .connect(MONGODB_URI,{ useNewUrlParser: true })
   .then(result => {
-    app.listen(process.env.PORT || 3000);
+    app.listen(process.env.PORT || 3003);
   })
   .catch(err => {
     console.log(err);

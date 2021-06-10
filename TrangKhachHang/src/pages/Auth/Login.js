@@ -18,6 +18,12 @@ class Login extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+  componentWillMount() {
+    if(this.props.logout){
+      this.props.logoutHandler();
+    }
+  }
+  
   handleChange(event) {
     const target = event.target;
     const value = target.value;
@@ -122,6 +128,8 @@ class Login extends Component {
       return <Redirect to='/' />;
     }
   }
+
+  
   render() {
     return (
       <Fragment>
@@ -143,7 +151,6 @@ class Login extends Component {
                   <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
                   <input type="password" className="form-control" id="exampleInputPassword1" onChange={this.handleChange} name="password" name="password" />
                   <div id="emailHelp" className="form-text">Nhập vào password.</div>
-
                 </div>
 
                 {/* <button class="button rounded-1 primary-bg text-white w-100 btn_3 boxed-btn" type="submit">Login</button> */}

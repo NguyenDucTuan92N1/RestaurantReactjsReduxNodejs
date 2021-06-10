@@ -45,17 +45,16 @@
                         <tr>
                             <td colspan="1"> <b> <b class="text-danger  mb-2">----Khách hàng: <%= orders[i].user.name%>
                                     </b></b> </td>
-
-                            <td><a class="btn btn-outline-danger rounded-pill"
-                                    href="/editOrder/?orderId=<%= orders[i]._id %>&&hide=true">Ẩn đơn hàng</a></td>
-
-
-
+                            <% if(orders[i].status === 1) {%>
+                                <td><a class="btn btn-outline-success rounded-pill"
+                                    href="/editOrder/?orderId=<%= orders[i]._id %>&&hide=true" onclick="return confirm('Bạn chắc chắn khách hàng đã Thanh toán.');"">Đã Thanh toán</a></td>
+                            <% } %>
+                            
+                            <td><b><%= orders[i].total%> VND</b> </td>
                         </tr>
 
                         <% for (let p of orders[i].products) { %>
                             <tr>
-
                                 <td>
                                     <b class="text-primary-darker  mb-2">
                                         <%= p.product.title %>
@@ -83,20 +82,20 @@
 
                                 </td>
                                 <td>
-                                    <% if(p.product.status===1){ %>
+                                    <% if(p.status===1){ %>
                                         <b class="text-primary  mb-2">Đang chuẩn bị.</b>
 
                                         <% } %>
 
-                                            <% if(p.product.status===2){ %>
+                                            <% if(p.status===2){ %>
                                                 <b class="text-success  mb-2">Đã hoàn tất.</b>
                                                 <% } %>
 
-                                                    <% if(p.product.status===-1){ %>
+                                                    <% if(p.status===-1){ %>
                                                         <b class="text-danger  mb-2">Đã hủy.</b>
                                                         <% } %>
 
-                                                            <% if(p.product.status===4){ %>
+                                                            <% if(p.status===4){ %>
                                                                 ...
                                                                 <% } %>
 
@@ -105,7 +104,7 @@
                                     <%= moment( new Date(orders[i].createdAt) ).format('llll') %>
                                 </td>
                                 <td class="float-right">
-                                    <% if(p.product.status===1){ %>
+                                    <% if(p.status===1){ %>
 
                                         <a class="btn btn-soft-primary mr-3"
                                             href="/editOrder/?orderId=<%= orders[i]._id %>&&productId=<%= p.product._id %>&&editMethod=3">Hoàn
@@ -113,12 +112,13 @@
                                         <a class="btn btn-soft-danger mr-3"
                                             href="/editOrder/?orderId=<%= orders[i]._id %>&&productId=<%= p.product._id %>&&editMethod=4">Hủy
                                             món</a>
+                                            
                                         <% } %>
-                                            <% if(p.product.status===2){ %>
+                                            <% if(p.status===2){ %>
                                                 <b class="text-success  mb-2">Đã hoàn tất.</b>
 
                                                 <% } %>
-                                                    <% if(p.product.status===-1){ %>
+                                                    <% if(p.status===-1){ %>
                                                         <b class="text-danger  mb-2">Đã hủy món.</b>
 
                                                         <% } %>

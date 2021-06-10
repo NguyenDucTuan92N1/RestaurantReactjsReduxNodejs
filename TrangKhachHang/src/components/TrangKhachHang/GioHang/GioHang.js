@@ -2,13 +2,18 @@ import React, { Component, Fragment } from 'react'
 import ItemGioHang from '../ItemGioHang/ItemGioHang';
 import { handleCLickCreateOrder } from '../Alert/Alert';
 import  { Redirect } from 'react-router-dom'
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import { URLserver } from '../constant';
+
 
 export default class GioHang extends Component {
     state = {
         products: [],
         token: this.props.token,
         isUpdate: false,
-        redirectOrder: false
+        redirectOrder: false,
+        loiQuaSoLuong: null
     };
 
     componentDidMount() {
@@ -61,7 +66,42 @@ export default class GioHang extends Component {
             );
         }
     };
+    loadProducts2 = () => {
+        console.log('Loadproducts');
 
+        let method = 'GET';
+        let url = URLserver + '/product/getProducts';
+
+        fetch(url, {
+            method: method,
+            headers: { 'Authorization': 'Bearer ' + this.props.token },
+        })
+            .then(res => {
+                if (res.status !== 200) {
+                    throw new Error('Failed to fetch products.');
+                }
+                return res.json();
+            })
+            .then(resData => {
+                console.log(resData.products);
+                for(let p of resData.products){
+                    console.log("p");
+                    console.log(p);
+                    
+                    for(let pState of this.state.products){
+                        if(p._id === pState.productId._id && p.quantity < pState.quantity){
+                            this.setState({
+                                loiQuaSoLuong: p.title
+                            })
+                            throw new Error(p.title + ' Với số lượng ít hơn: ' + p.quantity);
+                        }
+                        
+                    }
+                }
+                this.createOrder();
+            })
+            .catch(this.catchError);
+    };
     createOrder = () => {
         console.log('createOrder');
 
@@ -93,6 +133,23 @@ export default class GioHang extends Component {
             })
             .catch(this.catchError);
     };
+    submit = (e) => {
+        e.preventDefault();
+        confirmAlert({
+            title: 'Xác nhận đặt món',
+            message: 'Bạn có chắc chắn đặt món.',
+            buttons: [
+                {
+                    label: 'Chắc chắn',
+                    onClick: () => this.loadProducts2()
+                },
+                {
+                    label: 'Không',
+                    onClick: () => {}
+                }
+            ]
+        });
+    };
     showButton = () => {
         if (this.state.products.length > 0) return (
             <div className="row">
@@ -100,7 +157,8 @@ export default class GioHang extends Component {
 
                 </div>
                 <div className="col">
-                    <a href="#" class="genric-btn success radius" onClick={(e) => this.createOrder(e)} >Đặt hàng</a>
+                    {/* <a href="#" class="genric-btn success radius" onClick={(e) => this.createOrder(e)} >Đặt hàng</a> */}
+                    <a href="#" class="genric-btn success radius" onClick={(e)=> this.submit(e)} >Đặt hàng</a>
                 </div>
 
             </div>
@@ -129,6 +187,14 @@ export default class GioHang extends Component {
                 redirectOrder: false
             })
             return <Redirect to='/donhang'/>;
+        }
+    }
+    catchError = (e)=>{
+        if(this.state.loiQuaSoLuong){
+            this.setState({
+                loiQuaSoLuong: null
+            })
+            return window.confirm("Lỗi đặt quá số lượng hiện có: " + e);
         }
     }
     render() {

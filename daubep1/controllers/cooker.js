@@ -84,11 +84,24 @@ exports.postEditProduct = (req, res, next) => {
 exports.getOrders = (req, res, next) => {
   Order.find()
     .then(orders => {
-
+      newOrders = [];
+      // console.log(orders[0]);
+      for(let o of orders){
+        var total = 0;
+        for(let p of o.products){
+          if(p.status > 0){
+            total += p.quantity * p.product.price;
+          }
+        }
+        newO = {...o._doc, total: total};
+        newOrders.push(newO);
+      }
+      // console.log(newOrders[0]);
+      
       res.render('cooker/orders', {
         path: '/orders',
         pageTitle: 'Orders',
-        orders: orders,
+        orders: newOrders,
         moment: moment,
         date_from: new Date(),
         date_to: new Date(),
@@ -116,6 +129,7 @@ exports.getEditOrder = (req, res, next) => {
         order.status = -1;
         console.log(order.status);
       }
+      
       else{
         for (var p of order.products) {
           console.log(p.product._id.toString());
@@ -134,15 +148,15 @@ exports.getEditOrder = (req, res, next) => {
             if (editMethod.toString() === "3") {
               // Hoàn tất
               console.log("Hoàn tất");
-              
-              p.product = {...p.product, status: 2}
+              p.status = 2;
   
   
             }
             if (editMethod.toString() === "4") {
               // Hủy món
               console.log("Hủy món");
-              p.product = {...p.product, status: -1}
+              p.status = -1;
+
   
             }
           }

@@ -1,6 +1,28 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 export default class Header extends Component {
+    submit = (e) => {
+        e.preventDefault();
+        confirmAlert({
+            title: 'Xác nhận đăng xuất',
+            message: 'Bạn có chắc chắn đăng xuất tài khoản.',
+            buttons: [
+                {
+                    label: 'Chắc chắn',
+                    onClick: () => alert('Click Yes')
+                },
+                {
+                    label: 'Không',
+                    onClick: () => alert('Click No')
+                }
+            ]
+        });
+    };
+
+
     render() {
         return (
             <header>
@@ -26,7 +48,12 @@ export default class Header extends Component {
                                     <ul>
                                         <li className="button-header">
                                             <a href="#" className="btn header-btn2"> <i className="fas fa-phone-alt" />(+84) 0123456789</a>
+                                            {/* <a href="/logout" class="header-btn ml-30" onClick={(e)=> this.submit(e)}>Đăng xuất</a> */}
+                                            <a href="/logout" class="header-btn ml-30" onClick={(e) => {
+                                                if (!window.confirm('Bạn chắc chắn Đăng xuất?')) e.preventDefault();
+                                            }}>Đăng xuất</a>
                                         </li>
+
                                     </ul>
                                 </div>
                             </div>

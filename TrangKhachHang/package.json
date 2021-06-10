@@ -6,6 +6,7 @@
     "@types/react-notifications-component": "^3.1.0",
     "axios": "^0.21.1",
     "react": "^16.5.2",
+    "react-confirm-alert": "^2.7.0",
     "react-dom": "^16.5.2",
     "react-notifications-component": "^3.1.0",
     "react-router-dom": "^4.3.1",

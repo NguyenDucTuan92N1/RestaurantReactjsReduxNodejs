@@ -44,9 +44,12 @@ export default class Main extends Component {
             console.log(this.state.products);
             return (
                 this.state.products.map(product => {
+                    console.log("product");
                     console.log(product);
+                    if(product.status > 0 && product.quantity > 0 ){
+                        return <Product data={product} token={this.props.token}></Product>
+                    }
                     
-                    return <Product data={product} token={this.props.token}></Product>
                 })
             );
         }
@@ -57,7 +60,9 @@ export default class Main extends Component {
             return (
                 this.state.products.filter(product => 
                     product.category === category).map(product => {
-                        return <Product data={product} token={this.props.token}></Product>
+                        if(product.status > 0 && product.quantity > 0 ){
+                            return <Product data={product} token={this.props.token}></Product>
+                        }
                     })
             );
         }

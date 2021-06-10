@@ -29,7 +29,7 @@
                     <th>Người dùng</th>
                     <th>Tên món</th>
                     <th>Giá</th>
-                    <th>Mô tả</th>
+                    <th>Số lượng</th>
                     <th>Trạng thái</th>
                     <th>Ngày tạo</th>
                 </tr>
@@ -58,15 +58,15 @@
                             </td>
                             <td>
                                 <% if(p.status===1){ %>
-                                    Đang chuẩn bị
+                                    <p class="text-primary mb-2">Đang chuẩn bị.</p>
                                     <% } %>
 
                                         <% if(p.status===2){ %>
-                                            Đã hoàn tất
+                                            <p class="text-success mb-2">Đã hoàn tất.</p>
                                             <% } %>
 
-                                                <% if(p.status===3){ %>
-                                                    Đã hủy
+                                                <% if(p.status===-1){ %>
+                                                    <p class="text-danger mb-0">Đã hủy.</p>
                                                     <% } %>
 
                                                         <% if(p.status===4){ %>

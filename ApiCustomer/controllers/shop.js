@@ -8,10 +8,29 @@ const User = require('../models/user');
 exports.getCart = (req, res, next) => {
   User.findById(req.userId)
     .then(user => {
-      res.status(200).json({
-        message: 'Get cart successfully.',
-        products: user.cart.items
-      });
+      user.populate('cart.items.productId')
+        .execPopulate()
+        .then(user => {
+          console.log(user);
+          if (user.cart.items.length === 0) {
+            res.status(200).json({
+              message: 'Cart is empty!!!',
+              products: []
+            });
+          }
+          else {
+            res.status(200).json({
+              message: 'Get cart successfully.',
+              products: user.cart.items
+            })
+          }
+        }
+        ).catch(err => {
+          if (!err.statusCode) {
+            err.statusCode = 500;
+          }
+          next(err);
+        });
     })
     .catch(err => {
       if (!err.statusCode) {
@@ -93,16 +112,29 @@ exports.getOrders = (req, res, next) => {
     error.statusCode = 422;
     throw error;
   }
-  User.findById(req.userId)
-    .then(user => {
-      Order.find({ 'createdAt': user._id })
-        .then(orders => {
-          // console.log(orders);
-          res.status(200).json({
-            message: 'Fetched orders successfully.',
-            orders: orders
-          });
-        })
+  var orderId = req.params.orderId;
+  console.log('getOrders');
+  
+  Order.find({'user.userId': req.userId})
+    .then(orders => {
+      newOrders = [];
+      console.log(orders[0]);
+      for(let o of orders){
+        var total = 0;
+        for(let p of o.products){
+          if(p.status > 0){
+            total += p.quantity * p.product.price;
+          }
+        }
+        newO = {...o._doc, total: total};
+        newOrders.push(newO);
+      }
+      console.log('orders');
+      console.log(newOrders);
+      res.status(200).json({
+        message: 'Fetched orders successfully.',
+        orders: newOrders
+      });
     })
     .catch(err => {
       if (!err.statusCode) {
@@ -158,6 +190,15 @@ exports.postOrder = (req, res, next) => {
           }
           else {
             const products = user.cart.items.map(i => {
+              console.log('i.productId._doc._id');
+              console.log(i.productId._doc);
+              Product.findById(i.productId._doc._id).then(product=>{
+                product.quantity -= i.quantity;
+                if(product.quantity < 0){
+                  product.quantity = 0;
+                }
+                product.save();
+              })
               return { quantity: i.quantity, product: { ...i.productId._doc }, status: 1 };
             });
             const order = new Order({
@@ -187,7 +228,7 @@ exports.postOrder = (req, res, next) => {
               });
           }
         })
-        
+
     })
     .catch(err => {
       if (!err.statusCode) {

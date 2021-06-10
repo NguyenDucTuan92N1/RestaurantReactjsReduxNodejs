@@ -11,7 +11,7 @@ const router = express.Router();
 // router.get('/show',  adminController.showAdmin);
 
 // /admin/show => GET
-router.get('/showProducts',  adminController.showProducts);
+router.get('/showProducts', isAuth, adminController.showProducts);
 
 
 // router.get('/add-product', isAuth, adminController.getAddProduct);
@@ -39,10 +39,10 @@ router.post('/editProduct', isAuth, adminController.postEditProduct);
 
 router.post('/delete-product', isAuth, adminController.postDeleteProduct);
 
-router.get('/orders',  adminController.getOrders);
-router.post('/search_date',  adminController.search_date);
+router.get('/orders',isAuth,  adminController.getOrders);
+router.post('/search_date',isAuth,  adminController.search_date);
 
-router.get('/',  adminController.showProducts);
+router.get('/', isAuth, adminController.showProducts);
 
 module.exports = router;
 

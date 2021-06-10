@@ -55,16 +55,21 @@ export default class GioHang extends Component {
             let i = 0;
             return (
                 this.state.orders.map(order => {
-                    i = i + 1;
+                    i = 0;
                     console.log("order");
-                    console.log(order.products);
-                    return order.products.map(productItem => {
-                        console.log("product");
-                        console.log(productItem);
+                    console.log(order);
+                    if(order.status > 0){
+                        return (
                         
-                        return <ItemDonHang data={{ _id: productItem._id, index: i, img: productItem.product.imageUrl, price: productItem.product.price, title: productItem.product.title, quantity: productItem.quantity, status: productItem.status }} token={this.props.token} onDelete={this.delete}></ItemDonHang>
-                    })
-                     
+                            order.products.map(productItem => {
+                            i+=1;
+                            console.log("product");
+                            console.log(productItem);
+                            
+                            return <ItemDonHang data={{ _id: order._id, total: order.total,  index: i, img: productItem.product.imageUrl, price: productItem.product.price, title: productItem.product.title, quantity: productItem.quantity, status: productItem.status }} token={this.props.token} onDelete={this.delete}></ItemDonHang>
+                        })
+                        )
+                    }
                 })
             );
         }
@@ -95,9 +100,10 @@ export default class GioHang extends Component {
                                 <div className="table-head">
                                     <div className="country">Id Đơn hàng</div>
                                     <div className=" visit">Tên</div>
-                                    <div className="visit">Giá</div>
+                                    <div className="serial">Giá</div>
                                     <div className="serial">Số lượng</div>
-                                    <div className="float-right">#</div>
+                                    <div className="visit">#</div>
+                                    <div className="serial">Tổng </div>
                                 </div>
                                 {this.showAllProduct()}
                             </div>

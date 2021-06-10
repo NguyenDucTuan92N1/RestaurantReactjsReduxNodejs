@@ -2,8 +2,6 @@ import React, { Component, Fragment } from 'react';
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import ReactNotifications from 'react-notifications-component';
 
-import LoginPage from './pages/Auth/Login';
-import SignupPage from './pages/Auth/Signup';
 import './App.css';
 import Header from './components/TrangKhachHang/Header/Header';
 import Footer from './components/TrangKhachHang/Footer/Footer';
@@ -11,6 +9,7 @@ import Main from './components/TrangKhachHang/Main/Main';
 import Order from './components/TrangKhachHang/Order/Order';
 import GioHang from './components/TrangKhachHang/GioHang/GioHang';
 import Login from './pages/Auth/Login';
+import Signup from './pages/Auth/Signup';
 import { URLserver } from './components/TrangKhachHang/constant';
 
 class App extends Component {
@@ -179,11 +178,11 @@ class App extends Component {
           path="/signup"
           exact
           render={props => (
-            <SignupPage
-              {...props}
-              onSignup={this.signupHandler}
-              loading={this.state.authLoading}
-            />
+            <Fragment>
+                  {/* <Header></Header> */}
+                  <Signup></Signup>
+                  {/* <Footer></Footer> */}
+              </Fragment>
           )}
         />
       </Switch>
@@ -230,6 +229,17 @@ class App extends Component {
                   
                   <Order token={this.state.token}></Order>
                   <Footer></Footer>
+              </Fragment>
+            )}
+          />
+          <Route
+            path="/logout"
+            exact
+            render={props => (
+              
+              <Fragment>
+                  
+                  <Login getDataLogin={this.getDataLogin} loginHandler={this.loginHandler} logout={true} logoutHandler={this.logoutHandler}></Login>
               </Fragment>
             )}
           />
