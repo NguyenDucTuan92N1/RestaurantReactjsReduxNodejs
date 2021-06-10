@@ -42,7 +42,7 @@ export default class Product extends Component {
             <div className="col-lg-4 col-md-6 col-sm-6 mb-3">
                 <div className="single-cat text-center mb-40">
                     <div className="cat-img">
-                        <img src={URLserver + this.props.data.imageUrl} alt={this.props.data.img} width= "250px"/>
+                        <img src={URLserver + this.props.data.imageUrl} alt={this.props.data.img} height="250px" width= "250px"/>
                         {/* <img src="https://cdn.24h.com.vn/upload/2-2019/images/2019-05-25/1558802221-860-vi-dau-sieu-pham-hoat-hinh-he-doraemon-vua-quen-vua-la-unnamed--8--1558666578-width739height559.png" alt={this.props.data.img} width= "250px"/> */}
                         <div className="numbering">{this.props.data.price / 1000}k</div>
                     </div>

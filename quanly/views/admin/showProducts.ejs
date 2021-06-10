@@ -22,7 +22,7 @@
                         <td><%= product.title %></td>
                         <td>
                             <span class="d-none">1</span>
-                                <img class="icon-img icon-img-sm mr-3" src="<%= product.imageUrl %>"
+                                <img class="icon-img icon-img-lg mr-3" src="<%= product.imageUrl %>"
                                     alt="<%= product.title %>">
                         </td>
                         <td><%= product.price %> </td>
@@ -30,20 +30,18 @@
                         <td><%= product.quantity %></td>
                         <td>
                             <% if(product.category === 1){ %>
-                                Đặc sản
+                                Ẩm thực Sài Gòn
                             <% } %>
                             
                             <% if(product.category === 2){ %>
-                                Hải sản
+                                Thức ăn nhanh
                             <% } %>
                             
                             <% if(product.category === 3){ %>
-                                Dân gian
-                            <% } %>
-                            
-                            <% if(product.category === 4){ %>
                                 Đồ uống
                             <% } %>
+                            
+                            
                                 
                         </td>
                         <td>
