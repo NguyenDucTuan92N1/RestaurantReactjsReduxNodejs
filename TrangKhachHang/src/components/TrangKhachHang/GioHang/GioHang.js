@@ -25,7 +25,7 @@ export default class GioHang extends Component {
         console.log('Loading cart');
 
         let method = 'GET';
-        let url = 'http://localhost:3001/cart';
+        let url = URLserver + '/cart';
 
         fetch(url, {
             method: method,
@@ -67,6 +67,7 @@ export default class GioHang extends Component {
                 return product;
             })
         });
+        
     }
 
     showAllProduct = () => {
@@ -81,6 +82,15 @@ export default class GioHang extends Component {
             );
         }
     };
+    showTong = () => {
+        if (this.state.products.length > 0) {
+            let tong = 0;
+            for (const product of this.state.products) {
+                tong +=product.productId.price *product.quantity;
+            }
+            return <b>{tong}</b>
+        }
+    }
     loadProducts2 = () => {
         console.log('Loadproducts');
 
@@ -124,7 +134,7 @@ export default class GioHang extends Component {
         // formData.append('productId', this.props.data._id);
 
         let method = 'POST';
-        let url = 'http://localhost:3001/create-order';
+        let url = URLserver + '/create-order';
 
         fetch(url, {
             method: method,
@@ -232,7 +242,7 @@ export default class GioHang extends Component {
                                     <div className="visit">Giá</div>
                                     <div className="visit">Số lượng</div>
                                     <div className="visit">Tổng</div>
-                                    <div className="visit">#</div>
+                                    <div className="visit">{this.showTong()} <b>VND</b></div>
                                 </div>
                                 {this.showAllProduct()}
                             </div>
