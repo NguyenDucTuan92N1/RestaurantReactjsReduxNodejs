@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import ItemDonHang from '../ItemDonHang/ItemDonHang';
 // import { handleCLickCreateOrder } from '../Alert/Alert';
 import  { Redirect } from 'react-router-dom'
+import { URLserver } from '../constant';
 
 export default class GioHang extends Component {
     state = {
@@ -20,7 +21,7 @@ export default class GioHang extends Component {
         console.log('Loading cart');
 
         let method = 'GET';
-        let url = 'http://localhost:3001/getOrders';
+        let url = URLserver + '/getOrders';
 
         fetch(url, {
             method: method,

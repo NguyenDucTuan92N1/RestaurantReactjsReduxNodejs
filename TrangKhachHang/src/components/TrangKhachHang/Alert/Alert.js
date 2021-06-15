@@ -17,6 +17,36 @@ export function handleCLickXoaSPGioHang() {
         }
     });
 }
+export function handleCLickTangSLSanPham () {
+    store.addNotification({
+        title: "Thành công!",
+        message: "Bạn đã tăng món ăn giỏ hàng",
+        type: "success",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+            duration: 2000,
+            onScreen: true
+        }
+    });
+}
+export function handleCLickGiamSLSanPham () {
+    store.addNotification({
+        title: "Thành công!",
+        message: "Bạn đã giảm món ăn từ giỏ hàng",
+        type: "success",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+            duration: 2000,
+            onScreen: true
+        }
+    });
+}
 export function handleCLickAddSPGioHang() {
     store.addNotification({
         title: "Thành công!",
