@@ -1,0 +1,89 @@
+import React, { Component } from 'react'
+import {handleCLickXoaSPGioHang} from '../Alert/Alert';
+import {URLserver} from '../constant';
+
+
+
+
+export default class ItemGioHang extends Component {
+    constructor(props){
+        super(props);
+        // this.state = {
+        //     clicks: this.props.data.quantity,
+        // }
+    };
+    // increment = () => {
+    //     this.setState({clicks: this.state.clicks + 1});
+    // }
+    // decrement = () => {
+    //     this.setState({clicks: this.state.clicks - 1});
+    // }
+    state = {
+        itemId: 1,   
+    }
+    showStatus =(status) =>{
+        if(status === 1) return <p class="text-primary">Đang thực hiện</p>;
+        if(status === 2) return <p class="text-success">Đã hoàn tất</p>;
+        if(status === -1) return <p class="text-danger">Đã hủy</p>;
+
+    }
+    xoaProduct = () => {
+        console.log('Delete product from cart');
+        console.log(this.props.data._id);
+        console.log(this.props.token);
+
+        const formData = new FormData();
+        formData.append('productId', this.props.data._id);
+
+        let method = 'POST';
+        let url = URLserver + '/cart-delete-item';
+
+        fetch(url, {
+            method: method,
+            headers: { 'Authorization': 'Bearer ' + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5kdDE5MDVAZ21haWwuY29tIiwidXNlcklkIjoiNjBiZGMzM2RjNGI1Nzk1ZjY0ZTZkNmFjIiwiaWF0IjoxNjIzMjUyMDY2LCJleHAiOjE2MjY4NTIwNjZ9.LwId5wksct8LXPw1Vli0EULs9SWxedPZ2E6y1lYy1ss" },
+            body: formData
+        })
+            .then(res => {
+                if (res.status !== 200) {
+                    throw new Error('Delete product from cart Failed.');
+                }
+                console.log(res);
+                return res.json();
+            })  
+            .then(resData => {
+                this.props.onDelete(1);
+                handleCLickXoaSPGioHang();
+                console.log(resData);
+            })
+            .catch(this.catchError);
+    };
+    xoaSanPham = (e) =>{
+        e.preventDefault();
+        this.xoaProduct();
+        console.log('đã xóa');
+        
+        
+    }
+
+    render() {
+        return (
+            <div className="table-row">
+                <div className="serial">{this.props.data.index}</div>
+                <div className="country"> <img src={URLserver + this.props.data.img} alt={this.props.data.img} width= "30px" />{this.props.data.title}</div>
+                <div className="visit">{this.props.data.price}</div>
+                
+                <div className="visit">
+                    <button onClick = {() => this.props.updateQuantity(this.props.data._id, 1)}><i class="fas fa-minus text-dark"></i></button>
+                    <span class="mx-2">{this.props.data.quantity}</span>
+                    <button onClick = {() => this.props.updateQuantity(this.props.data._id, 2)}><i class="fas fa-plus text-dark"></i></button>
+                </div>
+
+                <div className="visit">{this.props.data.price * this.props.data.quantity}</div>
+                
+                <div className="visit"> 
+                    <a href="#" class="genric-btn danger-border" onClick={(e)=>this.xoaSanPham(e)}>Xóa</a>
+                </div>
+            </div>
+        )
+    }
+}
