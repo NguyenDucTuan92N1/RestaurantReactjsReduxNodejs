@@ -144,16 +144,23 @@ exports.getEditProduct = (req, res, next) => {
 exports.postEditProduct = (req, res, next) => {
   const prodId = req.body.productId;
   const updatedTitle = req.body.title;
-  const updatedPrice = req.body.price;
   const updatedImageUrl = req.body.imageUrl;
+  const updatedPrice = req.body.price;
   const updatedDesc = req.body.description;
-
+  const updatedQuantity = req.body.quantity;
+  const updatedCategory = req.body.category;
+  const updatedStatus = req.body.status;
+  
   Product.findById(prodId)
     .then(product => {
+
       product.title = updatedTitle;
       product.price = updatedPrice;
       product.description = updatedDesc;
       product.imageUrl = updatedImageUrl;
+      product.quantity = updatedQuantity;
+      product.category = updatedCategory;
+      product.status = updatedStatus;
       return product.save();
     })
     .then(result => {
@@ -164,6 +171,8 @@ exports.postEditProduct = (req, res, next) => {
 };
 ///////////
 exports.getOrders = (req, res, next) => {
+  console.log('getOrders');
+  
   Order.find()
     .then(orders => {
       
@@ -180,6 +189,8 @@ exports.getOrders = (req, res, next) => {
     .catch(err => console.log(err));
 };
 exports.search_date = (req, res, next) => {
+  console.log("search_date ");
+
   var date_from = req.body.date_from;
   var date_to = req.body.date_to;
   console.log("date_from " + date_from);
@@ -190,14 +201,22 @@ exports.search_date = (req, res, next) => {
 // {createAt: {$gte: new Date("10/06/2014")}}
   Order.find()
     .then(orders => {
+      
       var newOrders = [];
 
       if(orders.length > 0){
         var date1 = new Date(date_from);
+        console.log("date1.getTime.toString()");
+        console.log(date1.toString());
+        
         var date2 = new Date(date_to);
         for (const order of orders) {
-          var date3 = new Date(orders[0].createdAt.toString());
+          // console.log("order");
+          // console.log(order);
+
+          var date3 = new Date(order.createdAt.toString());
           if(date1.getTime() < date3.getTime() && date3.getTime() < date2.getTime() ){
+
             newOrders.push(order);
           }
         }
