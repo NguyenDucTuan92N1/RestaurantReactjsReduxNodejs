@@ -74,6 +74,41 @@ exports.postCart = (req, res, next) => {
 
 };
 
+
+exports.postDecrCart = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const error = new Error('Validation failed, entered data is incorrect.');
+    error.statusCode = 422;
+    throw error;
+  }
+
+  console.log(req.userId);
+  const prodId = req.body.productId;
+
+  User.findById(req.userId)
+    .then(user => {
+      Product.findById(prodId).
+        then(product => {
+          return user.DecrCart(product);
+        })
+        .then(user => {
+          res.status(200).json({
+            message: 'Decreased product from cart successfully.',
+            products: user.cart.items
+          });
+        })
+    })
+    .catch(err => {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    });
+
+};
+
+
 exports.postCartDeleteProduct = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

@@ -14,6 +14,9 @@ router.get('/cart', isAuth, shopController.getCart);
 // Add một item vào trong giỏ hàng với productId
 router.post('/cart', isAuth, shopController.postCart);
 
+router.post('/decr_cart', isAuth, shopController.postDecrCart);
+
+
 // Xóa một item trong giỏ hàng với productId
 router.post('/cart-delete-item', isAuth, shopController.postCartDeleteProduct);
 
