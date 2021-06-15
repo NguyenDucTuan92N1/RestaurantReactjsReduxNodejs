@@ -58,7 +58,7 @@ userSchema.methods.DecrCart = function(product) {
   });
   const updatedCartItems = [...this.cart.items];
 
-  if (cartProductIndex >= 0 && this.cart.items[cartProductIndex].quantity > 0) {
+  if (cartProductIndex >= 0 && this.cart.items[cartProductIndex].quantity > 1) {
     newQuantity = this.cart.items[cartProductIndex].quantity - 1;
     updatedCartItems[cartProductIndex].quantity = newQuantity;
   } 
