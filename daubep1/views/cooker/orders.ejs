@@ -107,10 +107,10 @@
                                     <% if(p.status===1){ %>
 
                                         <a class="btn btn-soft-primary mr-3"
-                                            href="/editOrder/?orderId=<%= orders[i]._id %>&&productId=<%= p.product._id %>&&editMethod=3">Hoàn
+                                            href="/editOrder/?orderId=<%= orders[i]._id %>&&productId=<%= p.product._id %>&&editMethod=3" onclick="return confirm('Bạn xác nhận món ăn đã hoàn tất.');">Hoàn
                                             tất</a>
                                         <a class="btn btn-soft-danger mr-3"
-                                            href="/editOrder/?orderId=<%= orders[i]._id %>&&productId=<%= p.product._id %>&&editMethod=4">Hủy
+                                            href="/editOrder/?orderId=<%= orders[i]._id %>&&productId=<%= p.product._id %>&&editMethod=4" onclick="return confirm('Bạn xác nhận Hủy món ăn.');">Hủy
                                             món</a>
                                             
                                         <% } %>

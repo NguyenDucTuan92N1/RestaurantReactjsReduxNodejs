@@ -6,7 +6,7 @@ export function handleCLickXoaSPGioHang() {
     store.addNotification({
         title: "Thành công!",
         message: "Bạn đã xóa món ăn khỏi giỏ hàng",
-        type: "danger",
+        type: "warning",
         insert: "top",
         container: "top-right",
         animationIn: ["animate__animated", "animate__fadeIn"],
@@ -37,6 +37,21 @@ export function handleCLickGiamSLSanPhamKoThanhCong (){
     store.addNotification({
         title: "Không Thành công!",
         message: "Bạn cần xóa, món ăn không thể giảm",
+        type: "danger",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+            duration: 2000,
+            onScreen: true
+        }
+    });
+}
+export function handleCLickTangSLSanPhamKoThanhCong (){
+    store.addNotification({
+        title: "Không Thành công!",
+        message: "Món ăn không thể tăng lên vì quá Số lượng",
         type: "danger",
         insert: "top",
         container: "top-right",
