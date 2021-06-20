@@ -32,6 +32,22 @@ export function handleCLickTangSLSanPham () {
         }
     });
 }
+
+export function handleCLickGiamSLSanPhamKoThanhCong (){
+    store.addNotification({
+        title: "Không Thành công!",
+        message: "Bạn cần xóa, món ăn không thể giảm",
+        type: "danger",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+            duration: 2000,
+            onScreen: true
+        }
+    });
+}
 export function handleCLickGiamSLSanPham () {
     store.addNotification({
         title: "Thành công!",

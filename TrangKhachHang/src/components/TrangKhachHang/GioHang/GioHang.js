@@ -61,7 +61,9 @@ export default class GioHang extends Component {
             return (
                 this.state.products.map(product => {
                     i = i + 1;
-                    return <ItemGioHang data={{ _id: product.productId._id, index: i, img: product.productId.imageUrl, price: product.productId.price, title: product.productId.title, quantity: product.quantity }} token={this.props.token} onDelete={this.delete}></ItemGioHang>
+                    if (product.productId !== null){
+                        return <ItemGioHang data={{ _id: product.productId._id, index: i, img: product.productId.imageUrl, price: product.productId.price, title: product.productId.title, quantity: product.quantity }} token={this.props.token} onDelete={this.delete}></ItemGioHang>
+                    }
                 })
             );
         }
@@ -70,7 +72,9 @@ export default class GioHang extends Component {
         if (this.state.products.length > 0) {
             let tong = 0;
             for (const product of this.state.products) {
-                tong +=product.productId.price *product.quantity;
+                if(product.productId !== null){
+                    tong +=product.productId.price *product.quantity;
+                }
             }
             return <b>{tong}</b>
         }

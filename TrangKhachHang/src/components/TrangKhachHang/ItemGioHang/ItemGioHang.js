@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {handleCLickXoaSPGioHang} from '../Alert/Alert';
 import {handleCLickTangSLSanPham} from '../Alert/Alert';
 import {handleCLickGiamSLSanPham} from '../Alert/Alert';
+import {handleCLickGiamSLSanPhamKoThanhCong} from '../Alert/Alert';
 import {URLserver} from '../constant';
 import './ItemGioHang.css'
 
@@ -72,7 +73,11 @@ export default class ItemGioHang extends Component {
             })  
             .then(resData => {
                 this.props.onDelete(1);
-                handleCLickGiamSLSanPham();
+                if(this.props.data.quantity == 1){
+                    handleCLickGiamSLSanPhamKoThanhCong();
+                }else{
+                    handleCLickGiamSLSanPham();
+                }
                 console.log(resData);
             })
             .catch(this.catchError);
