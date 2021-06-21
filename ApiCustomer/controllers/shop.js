@@ -117,14 +117,13 @@ exports.postCartDeleteProduct = (req, res, next) => {
     throw error;
   }
 
-  // console.log(req.userId);
   const prodId = req.body.productId;
 
   User.findById(req.userId)
     .then(user => {
       user.removeFromCart(prodId)
         .then(result => {
-          // console.log(result);
+     
           res.status(200).json({
             message: 'Delete cart successfully.',
             user: { _id: user._id, name: user.name },
@@ -189,7 +188,7 @@ exports.getOneOrder = (req, res, next) => {
   var orderId = req.params.orderId;
   Order.findById(orderId)
     .then(order => {
-      // console.log(orders);
+ 
       res.status(200).json({
         message: 'Fetched orders successfully.',
         order: order
