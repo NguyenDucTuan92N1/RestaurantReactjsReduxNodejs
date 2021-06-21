@@ -12,13 +12,12 @@ exports.postDeleteProduct = (req, res, next) => {
     .catch(err => console.log(err));
 };
 
-////
+
 exports.getProducts = (req, res, next) => {
   Product.find()
-    // .select('title price -_id')
-    // .populate('category', 'name')
+    
     .then(products => {
-      // console.log(products);
+     
       res.render('cooker/showProducts', {
         prods: products,
         pageTitle: 'Cooker Products',
@@ -85,7 +84,7 @@ exports.getOrders = (req, res, next) => {
   Order.find()
     .then(orders => {
       newOrders = [];
-      // console.log(orders[0]);
+  
       for(let o of orders){
         var total = 0;
         for(let p of o.products){
@@ -96,8 +95,7 @@ exports.getOrders = (req, res, next) => {
         newO = {...o._doc, total: total};
         newOrders.push(newO);
       }
-      // console.log(newOrders[0]);
-      
+            
       res.render('cooker/orders', {
         path: '/orders',
         pageTitle: 'Orders',
